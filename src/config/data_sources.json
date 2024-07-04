@@ -5,12 +5,17 @@
             "source": "https://raw.githubusercontent.com/Hannibal046/Awesome-LLM/main/README.md",
             "retriever": "large_language_model",
             "include": [
-                "arxiv"
+                "arxiv",
+                ".pdf"
             ],
             "ignore": [
                 "github",
                 "img",
-                "manning"
+                "manning",
+                "linkedin",
+                "youtube",
+                "twitter",
+                "facebook"
             ]
         }
     ]
