@@ -13,7 +13,9 @@ logging.basicConfig(
 )
 
 class AsyncCrawler:
-    def __init__(self, urls=[], max_depth=2, ignore_domains=[], collect_domains=[], url_patterns={}, timeout=10):
+    def __init__(self, name, urls=[], max_depth=2, ignore_domains=[], collect_domains=[], url_patterns={}, timeout=10):
+        self.name = name
+        self.urls = urls
         self.visited_urls = set()
         self.urls_to_visit = [(url, 0) for url in urls]  # Tuplas de (url, depth)
         self.max_depth = max_depth
@@ -144,6 +146,7 @@ class AsyncCrawler:
 
     def generate_json_output(self):
         output = {
+            "name": self.name,
             "initial_urls": self.urls,
             "collected_urls": {}
         }
@@ -184,6 +187,19 @@ if __name__ == "__main__":
         # Add more patterns and transformations as needed
     }
 
-    crawler = AsyncCrawler(urls, max_depth=1, ignore_domains=ignore_domains, 
-                           collect_domains=collect_domains, url_patterns=url_patterns)
+    crawler = AsyncCrawler(
+        name="large-language-models",
+        urls=urls, 
+        max_depth=1, 
+        ignore_domains=ignore_domains, 
+        collect_domains=collect_domains, 
+        url_patterns=url_patterns
+    )
     asyncio.run(crawler.run())
+
+    # Generate and save JSON output
+    json_output = crawler.generate_json_output()
+    with open(f"assets/results/crawler_{crawler.name}.json", "w") as f:
+        f.write(json_output)
+
+    logging.info("Results saved to crawler.json")
