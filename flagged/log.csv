@@ -1,0 +1,644 @@
+query,output,flag,username,timestamp
+Large Language Models as World Models,"'You are Perplexica, an AI model who is expert at searching the web and answering user's queries.
+
+Generate a response that is informative and relevant to the user's query based on provided context (the context consits of search results containg a brief description of the content of that page).
+You must use this context to answer the user's query in the best way possible. Use an unbaised and journalistic tone in your response. Do not repeat the text.
+You must not tell the user to open any link or visit any website to get the answer. You must provide the answer in the response itself. If the user asks for links you can provide them.
+Your responses should be long in length be informative and relevant to the user's query. You can use markdowns to format your response. You should use the template provided below in \`template\` section. Make sure the answer is not short and is informative.
+You have to cite the answer using [number] notation. You must cite the sentences with their relevent context number. You must cite each and every part of the answer so the user can know where the information is coming from.
+Place these citations at the end of that particular sentence. You can cite the same sentence multiple times if it is relevant to the user's query like [number1][number2].
+However you do not need to cite it using the same number. You can use different numbers to cite the same sentence multiple times. The number refers to the number of the search result (passed in the context) used to generate that part of the answer.
+
+
+
+Com base nos documentos em <context> retornados por um sistema de buscas em artigos científicos armazenados no ArXiv, use o <template> fornecido abaixo para criar um resumo abrangente que contenha cada um aplicando o template passando o nome do capítulo ou principal conceito explorado nele como o **X = ** do <template>. 
+
+Diretrizes para o resumo:
+Os resumos devem ser avançados;
+Os resumos devem ser baseados nos principais aspectos do conceito abordado no texto, como técnicas ou funcionalidades específicas demonstradas em cada subcapítulo;
+O resumo deve conter todas principais informações presentes no texto sem omitir nenhum dado importante, com foco especial em não pular nenhum conceitos, resultados importante, argumentos, etc;
+O resumo deve conter as equações apresentadas, tabelas e outras informações críticas para um entendimento aprofundando e avançado do conteúdo;
+O resumo deve ser escrito de uma maneira acadêmica, do not repeat text.
+Você deve usar o <context> da melhor maneira possível para responder a query do usuário e escrever o resumo segundo as diretrizes;
+You must not tell the user to open any link or visit any website to get the answer. You must provide the answer in the response itself;
+Você não deve pedir para o usuário abrir um link ou visitar um site para ver a resposta. Você deve responder você mesmo;
+You have to cite the answer using [number] notation. The number is the idx on the documents. You must cite the sentences with their relevent context number. You must cite each and every part of the answer so the user can know where the information is coming from.
+Place these citations at the end of that particular sentence. You can cite the same sentence multiple times if it is relevant to the user's query like [number1][number2].
+However you do not need to cite it using the same number. You can use different numbers to cite the same sentence multiple times. The number refers to the number of the search result (passed in the context) used to generate that part of the answer.
+Coloque os resultados um texto coerente ao invés de apenas listar em tópicos, também foque em usar as formatações mostradas no template.
+
+Aything inside the following \`context\` HTML block provided below is for your knowledge returned by the search engine and is not shared by the user. You have to answer question on the basis of it and cite the relevant information from it but you do not have to talk about the context in your response. 
+
+<context>
+    <Document index=1 title=Training Compute-Optimal Large Language Models><Sumary>We investigate the optimal model size and number of tokens for training a
+transformer language model under a given compute budget. We find that current
+large language models are significantly undertrained, a consequence of the
+recent focus on scaling language models whilst keeping the amount of training
+data constant. By training over 400 language models ranging from 70 million to
+over 16 billion parameters on 5 to 500 billion tokens, we find that for
+compute-optimal training, the model size and the number of training tokens
+should be scaled equally: for every doubling of model size the number of
+training tokens should also be doubled. We test this hypothesis by training a
+predicted compute-optimal model, Chinchilla, that uses the same compute budget
+as Gopher but with 70B parameters and 4$\times$ more more data. Chinchilla
+uniformly and significantly outperforms Gopher (280B), GPT-3 (175B), Jurassic-1
+(178B), and Megatron-Turing NLG (530B) on a large range of downstream
+evaluation tasks. This also means that Chinchilla uses substantially less
+compute for fine-tuning and inference, greatly facilitating downstream usage.
+As a highlight, Chinchilla reaches a state-of-the-art average accuracy of 67.5%
+on the MMLU benchmark, greater than a 7% improvement over Gopher.</Sumary><Content>et al., 2021; Fedus et al., 2021; Zoph et al., 2022). The largest dense transformers have passed 500
+billion parameters (Smith et al., 2022). The drive to train larger and larger models is clear—so far
+increasing the size of language models has been responsible for improving the state-of-the-art in many
+language modelling tasks. Nonetheless, large language models face several challenges, including
+their overwhelming computational requirements (the cost of training and inference increase with
+model size) (Rae et al., 2021; Thoppilan et al., 2022) and the need for acquiring more high-quality
+training data. In fact, in this work we ﬁnd that larger, high quality datasets will play a key role in any
+further scaling of language models.
+Modelling the scaling behavior.
+Understanding the scaling behaviour of language models and
+their transfer properties has been important in the development of recent large models (Hernandez</Content></Document>
+<Document index=2 title=Training Compute-Optimal Large Language Models><Sumary>We investigate the optimal model size and number of tokens for training a
+transformer language model under a given compute budget. We find that current
+large language models are significantly undertrained, a consequence of the
+recent focus on scaling language models whilst keeping the amount of training
+data constant. By training over 400 language models ranging from 70 million to
+over 16 billion parameters on 5 to 500 billion tokens, we find that for
+compute-optimal training, the model size and the number of training tokens
+should be scaled equally: for every doubling of model size the number of
+training tokens should also be doubled. We test this hypothesis by training a
+predicted compute-optimal model, Chinchilla, that uses the same compute budget
+as Gopher but with 70B parameters and 4$\times$ more more data. Chinchilla
+uniformly and significantly outperforms Gopher (280B), GPT-3 (175B), Jurassic-1
+(178B), and Megatron-Turing NLG (530B) on a large range of downstream
+evaluation tasks. This also means that Chinchilla uses substantially less
+compute for fine-tuning and inference, greatly facilitating downstream usage.
+As a highlight, Chinchilla reaches a state-of-the-art average accuracy of 67.5%
+on the MMLU benchmark, greater than a 7% improvement over Gopher.</Sumary><Content>how performance of large language models and toxicity interact is an important future research
+question.
+While we have applied our methodology towards the training of auto-regressive language models,
+we expect that there is a similar trade-oﬀbetween model size and the amount of data in other
+modalities. As training large models is very expensive, choosing the optimal model size and training
+steps beforehand is essential. The methods we propose are easy to reproduce in new settings.
+6. Acknowledgements
+We’d like to thank Jean-baptiste Alayrac, Kareem Ayoub, Chris Dyer, Nando de Freitas, Demis Hassabis,
+Geoﬀrey Irving, Koray Kavukcuoglu, Nate Kushman and Angeliki Lazaridou for useful comments on
+the manuscript. We’d like to thank Andy Brock, Irina Higgins, Michela Paganini, Francis Song, and
+other colleagues at DeepMind for helpful discussions. We are also very grateful to the JAX and XLA
+team for their support and assistance.
+References</Content></Document>
+<Document index=3 title=BLOOM: A 176B-Parameter Open-Access Multilingual Language Model><Sumary>Large language models (LLMs) have been shown to be able to perform new tasks
+based on a few demonstrations or natural language instructions. While these
+capabilities have led to widespread adoption, most LLMs are developed by
+resource-rich organizations and are frequently kept from the public. As a step
+towards democratizing this powerful technology, we present BLOOM, a
+176B-parameter open-access language model designed and built thanks to a
+collaboration of hundreds of researchers. BLOOM is a decoder-only Transformer
+language model that was trained on the ROOTS corpus, a dataset comprising
+hundreds of sources in 46 natural and 13 programming languages (59 in total).
+We find that BLOOM achieves competitive performance on a wide variety of
+benchmarks, with stronger results after undergoing multitask prompted
+finetuning. To facilitate future research and applications using LLMs, we
+publicly release our models and code under the Responsible AI License.</Sumary><Content>lingual settings. In Challenges & Perspectives in Creating Large Language Models, 2022.
+URL https://openreview.net/forum?id=rK-7NhfSIW5.
+Yi Tay, Jason Wei, Hyung Won Chung, Vinh Q Tran, David R So, Siamak Shakeri, Xavier
+Garcia, Huaixiu Steven Zheng, Jinfeng Rao, Aakanksha Chowdhery, et al. Transcending
+scaling laws with 0.1% extra compute. arXiv preprint arXiv:2210.11399, 2022.
+Ryan Teehan, Miruna Clinciu, Oleg Serikov, Eliza Szczechla, Natasha Seelam, Shachar
+Mirkin, and Aaron Gokaslan. Emergent structures and training dynamics in large lan-
+guage models. In Proceedings of BigScience Episode #5 – Workshop on Challenges &
+Perspectives in Creating Large Language Models, pages 146–159, virtual+Dublin, May
+2022. Association for Computational Linguistics. doi: 10.18653/v1/2022.bigscience-1.11.
+URL https://aclanthology.org/2022.bigscience-1.11.
+Ian Tenney, Patrick Xia, Berlin Chen, Alex Wang, Adam Poliak, R Thomas McCoy, Na-
+joung Kim, Benjamin Van Durme, Samuel R Bowman, Dipanjan Das, et al. What do</Content></Document>
+<Document index=4 title=Branch-Train-Merge: Embarrassingly Parallel Training of Expert Language Models><Sumary>We present Branch-Train-Merge (BTM), a communication-efficient algorithm for
+embarrassingly parallel training of large language models (LLMs). We show it is
+possible to independently train subparts of a new class of LLMs on different
+subsets of the data, eliminating the massive multi-node synchronization
+currently required to train LLMs. BTM learns a set of independent expert LMs
+(ELMs), each specialized to a different textual domain, such as scientific or
+legal text. These ELMs can be added and removed to update data coverage,
+ensembled to generalize to new domains, or averaged to collapse back to a
+single LM for efficient inference. New ELMs are learned by branching from
+(mixtures of) ELMs in the current set, further training the parameters on data
+for the new domain, and then merging the resulting model back into the set for
+future use. Experiments show that BTM improves in- and out-of-domain
+perplexities as compared to GPT-style Transformer LMs, when controlling for
+training cost. Through extensive analysis, we show that these results are
+robust to different ELM initialization schemes, but require expert domain
+specialization; LM ensembles with random data splits do not perform well. We
+also present a study of scaling BTM into a new corpus of 64 domains (192B
+whitespace-separated tokens in total); the resulting LM (22.4B total
+parameters) performs as well as a Transformer LM trained with 2.5 times more
+compute. These gains grow with the number of domains, suggesting more
+aggressive parallelism could be used to efficiently train larger models in
+future work.</Sumary><Content>large language models with many smaller, independently trained ELMs. We envision that this
+work lays the foundation for democratized model development at inclusive compute budgets — that
+groups with different resource constraints and research interests may combine efforts to build open-
+sourced, community-authored large language models, comprised of continually-evolving repositories
+of EXPERT LMs.
+Acknowledgments and Disclosure of Funding
+This paper beneﬁted from thoughtful feedback from a number of people: Ari Holtzman, Candace
+Ross, Colin Raffel, Gabriel Ilharco, Ishaan Gulrajani, Julian Michael, Mitchell Wortsman, Stephen
+Roller, Swabha Swayamdipta and William Fedus.
+At UW, this work was partially supported by the Ofﬁce of Naval Research under MURI grant
+N00014-18-1-2670.
+References
+Roee Aharoni and Yoav Goldberg. 2020. Unsupervised domain clusters in pretrained language models.
+In Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics, pages</Content></Document>
+<Document index=5 title=Scaling Language Models: Methods, Analysis & Insights from Training Gopher><Sumary>Language modelling provides a step towards intelligent communication systems
+by harnessing large repositories of written human knowledge to better predict
+and understand the world. In this paper, we present an analysis of
+Transformer-based language model performance across a wide range of model
+scales -- from models with tens of millions of parameters up to a 280 billion
+parameter model called Gopher. These models are evaluated on 152 diverse tasks,
+achieving state-of-the-art performance across the majority. Gains from scale
+are largest in areas such as reading comprehension, fact-checking, and the
+identification of toxic language, but logical and mathematical reasoning see
+less benefit. We provide a holistic analysis of the training dataset and
+model's behaviour, covering the intersection of model scale with bias and
+toxicity. Finally we discuss the application of language models to AI safety
+and the mitigation of downstream harms.</Sumary><Content>Cyprien de Masson d’Autume, Yujia Li, Tayfun Terzi, Vladimir Mikulik, Igor Babuschkin, Aidan Clark, Diego de Las Casas,
+Aurelia Guy, Chris Jones, James Bradbury, Matthew Johnson, Blake Hechtman, Laura Weidinger, Iason Gabriel,
+William Isaac, Ed Lockhart, Simon Osindero, Laura Rimell, Chris Dyer, Oriol Vinyals, Kareem Ayoub, JeﬀStanway,
+Lorrayne Bennett, Demis Hassabis, Koray Kavukcuoglu and Geoﬀrey Irving
+Language modelling provides a step towards intelligent communication systems by harnessing large
+repositories of written human knowledge to better predict and understand the world. In this paper, we
+present an analysis of Transformer-based language model performance across a wide range of model
+scales — from models with tens of millions of parameters up to a 280 billion parameter model called
+Gopher. These models are evaluated on 152 diverse tasks, achieving state-of-the-art performance across
+the majority. Gains from scale are largest in areas such as reading comprehension, fact-checking, and</Content></Document>
+<Document index=6 title=BLOOM: A 176B-Parameter Open-Access Multilingual Language Model><Sumary>Large language models (LLMs) have been shown to be able to perform new tasks
+based on a few demonstrations or natural language instructions. While these
+capabilities have led to widespread adoption, most LLMs are developed by
+resource-rich organizations and are frequently kept from the public. As a step
+towards democratizing this powerful technology, we present BLOOM, a
+176B-parameter open-access language model designed and built thanks to a
+collaboration of hundreds of researchers. BLOOM is a decoder-only Transformer
+language model that was trained on the ROOTS corpus, a dataset comprising
+hundreds of sources in 46 natural and 13 programming languages (59 in total).
+We find that BLOOM achieves competitive performance on a wide variety of
+benchmarks, with stronger results after undergoing multitask prompted
+finetuning. To facilitate future research and applications using LLMs, we
+publicly release our models and code under the Responsible AI License.</Sumary><Content>In Challenges & Perspectives
+in Creating Large Language Models, 2022a. URL https://openreview.net/forum?id=
+HRfzInfr8Z9.
+Jason Alan Fries, Leon Weber, Natasha Seelam, Gabriel Altay, Debajyoti Datta, Samuele
+Garda, Myungsun Kang, Ruisi Su, Wojciech Kusa, Samuel Cahyawijaya, Fabio Barth,
+Simon Ott, Matthias Samwald, Stephen Bach, Stella Biderman, Mario S¨
+anger, Bo Wang,
+Alison Callahan, Daniel León Peri˜
+nán, Théo Gigant, Patrick Haller, Jenny Chim,
+Jose David Posada, John Michael Giorgi, Karthik Rangasai Sivaraman, Marc Pàmies,
+Marianna Nezhurina, Robert Martin, Michael Cullan, Moritz Freidank, Nathan Dahlberg,
+Shubhanshu Mishra, Shamik Bose, Nicholas Michio Broad, Yanis Labrak, Shlok S Desh-
+mukh, Sid Kiblawi, Ayush Singh, Minh Chien Vu, Trishala Neeraj, Jonas Golde, Al-
+bert Villanova del Moral, and Benjamin Beilharz.
+BigBio:
+A framework for data-
+centric biomedical natural language processing.
+In Thirty-sixth Conference on Neu-
+ral Information Processing Systems Datasets and Benchmarks Track, 2022b.
+URL</Content></Document>
+<Document index=7 title=Training Compute-Optimal Large Language Models><Sumary>We investigate the optimal model size and number of tokens for training a
+transformer language model under a given compute budget. We find that current
+large language models are significantly undertrained, a consequence of the
+recent focus on scaling language models whilst keeping the amount of training
+data constant. By training over 400 language models ranging from 70 million to
+over 16 billion parameters on 5 to 500 billion tokens, we find that for
+compute-optimal training, the model size and the number of training tokens
+should be scaled equally: for every doubling of model size the number of
+training tokens should also be doubled. We test this hypothesis by training a
+predicted compute-optimal model, Chinchilla, that uses the same compute budget
+as Gopher but with 70B parameters and 4$\times$ more more data. Chinchilla
+uniformly and significantly outperforms Gopher (280B), GPT-3 (175B), Jurassic-1
+(178B), and Megatron-Turing NLG (530B) on a large range of downstream
+evaluation tasks. This also means that Chinchilla uses substantially less
+compute for fine-tuning and inference, greatly facilitating downstream usage.
+As a highlight, Chinchilla reaches a state-of-the-art average accuracy of 67.5%
+on the MMLU benchmark, greater than a 7% improvement over Gopher.</Sumary><Content>Training Compute-Optimal Large Language Models
+Jordan Hoﬀmann★, Sebastian Borgeaud★, Arthur Mensch★, Elena Buchatskaya, Trevor Cai, Eliza Rutherford,
+Diego de Las Casas, Lisa Anne Hendricks, Johannes Welbl, Aidan Clark, Tom Hennigan, Eric Noland,
+Katie Millican, George van den Driessche, Bogdan Damoc, Aurelia Guy, Simon Osindero, Karen Simonyan,
+Erich Elsen, Jack W. Rae, Oriol Vinyals and Laurent Sifre★
+★Equal contributions
+We investigate the optimal model size and number of tokens for training a transformer language model
+under a given compute budget. We ﬁnd that current large language models are signiﬁcantly under-
+trained, a consequence of the recent focus on scaling language models whilst keeping the amount of
+training data constant. By training over 400 language models ranging from 70 million to over 16 billion
+parameters on 5 to 500 billion tokens, we ﬁnd that for compute-optimal training, the model size and</Content></Document>
+<Document index=8 title=Emergent Abilities of Large Language Models><Sumary>Scaling up language models has been shown to predictably improve performance
+and sample efficiency on a wide range of downstream tasks. This paper instead
+discusses an unpredictable phenomenon that we refer to as emergent abilities of
+large language models. We consider an ability to be emergent if it is not
+present in smaller models but is present in larger models. Thus, emergent
+abilities cannot be predicted simply by extrapolating the performance of
+smaller models. The existence of such emergence implies that additional scaling
+could further expand the range of capabilities of language models.</Sumary><Content>the following.
+Further model scaling. Further scaling up models has so far appeared to increase the capabilities of
+language models, and is a straightforward direction for future work. However, simply scaling up language
+models is computationally expensive and requires solving substantial hardware challenges, and so other
+approaches will likely play a key role in the future of the emergent abilities of large language models.
+Improved model architectures and training. Improving model architecture and training procedures
+may facilitate high-quality models with emergent abilities while mitigating computational cost. One direction
+is using sparse mixture-of-experts architectures (Lepikhin et al., 2021; Fedus et al., 2021; Artetxe et al.,
+2021; Zoph et al., 2022), which scale up the number of parameters in a model while maintaining constant
+computational costs for an input. Other directions for better computational eﬃciency could involve variable</Content></Document>
+<Document index=9 title=On the Opportunities and Risks of Foundation Models><Sumary>AI is undergoing a paradigm shift with the rise of models (e.g., BERT,
+DALL-E, GPT-3) that are trained on broad data at scale and are adaptable to a
+wide range of downstream tasks. We call these models foundation models to
+underscore their critically central yet incomplete character. This report
+provides a thorough account of the opportunities and risks of foundation
+models, ranging from their capabilities (e.g., language, vision, robotics,
+reasoning, human interaction) and technical principles(e.g., model
+architectures, training procedures, data, systems, security, evaluation,
+theory) to their applications (e.g., law, healthcare, education) and societal
+impact (e.g., inequity, misuse, economic and environmental impact, legal and
+ethical considerations). Though foundation models are based on standard deep
+learning and transfer learning, their scale results in new emergent
+capabilities,and their effectiveness across so many tasks incentivizes
+homogenization. Homogenization provides powerful leverage but demands caution,
+as the defects of the foundation model are inherited by all the adapted models
+downstream. Despite the impending widespread deployment of foundation models,
+we currently lack a clear understanding of how they work, when they fail, and
+what they are even capable of due to their emergent properties. To tackle these
+questions, we believe much of the critical research on foundation models will
+require deep interdisciplinary collaboration commensurate with their
+fundamentally sociotechnical nature.</Sumary><Content>models hold promise for expanding NLP to encompass more linguistic diversity. It remains an open
+research question to understand whether it is possible to make foundation models that robustly and
+equitably represent language with both its major and subtle variations, giving equal weight and
+acuity to what makes each linguistic variety distinct [research posing and addressing this question
+includes Ponti et al. 2019; Bender 2011; Joshi et al. 2020].
+Following the success of foundation models for English, multilingual foundation models have
+been released to extend that success to non-English languages. For most of the over 6,000 languages
+in the world, the text data available is not enough to train a large-scale foundation model. To give
+one example, there are over 65 million speakers of Fula, a West African language, but few if any
+resources available for NLP in Fula [Nguer et al. 2020]. Multilingual foundation models address this</Content></Document>
+<Document index=10 title=Holistic Evaluation of Language Models><Sumary>Language models (LMs) are becoming the foundation for almost all major
+language technologies, but their capabilities, limitations, and risks are not
+well understood. We present Holistic Evaluation of Language Models (HELM) to
+improve the transparency of language models. First, we taxonomize the vast
+space of potential scenarios (i.e. use cases) and metrics (i.e. desiderata)
+that are of interest for LMs. Then we select a broad subset based on coverage
+and feasibility, noting what's missing or underrepresented (e.g. question
+answering for neglected English dialects, metrics for trustworthiness). Second,
+we adopt a multi-metric approach: We measure 7 metrics (accuracy, calibration,
+robustness, fairness, bias, toxicity, and efficiency) for each of 16 core
+scenarios when possible (87.5% of the time). This ensures metrics beyond
+accuracy don't fall to the wayside, and that trade-offs are clearly exposed. We
+also perform 7 targeted evaluations, based on 26 targeted scenarios, to analyze
+specific aspects (e.g. reasoning, disinformation). Third, we conduct a
+large-scale evaluation of 30 prominent language models (spanning open,
+limited-access, and closed models) on all 42 scenarios, 21 of which were not
+previously used in mainstream LM evaluation. Prior to HELM, models on average
+were evaluated on just 17.9% of the core HELM scenarios, with some prominent
+models not sharing a single scenario in common. We improve this to 96.0%: now
+all 30 models have been densely benchmarked on the same core scenarios and
+metrics under standardized conditions. Our evaluation surfaces 25 top-level
+findings. For full transparency, we release all raw model prompts and
+completions publicly for further analysis, as well as a general modular
+toolkit. We intend for HELM to be a living benchmark for the community,
+continuously updated with new scenarios, metrics, and models.</Sumary><Content>The rise of language models.
+Language modeling has a long-standing tradition of study across human
+language processing and computational language processing (Shannon, 1948; Lounsburg, 1954; Goldman-
+Eisler, 1958; Baker, 1975b;a; Jelinek, 1976; 1990; Hale, 2001; Levy, 2008; Merity et al., 2018; Radford et al.,
+2018; Devlin et al., 2019; Brown et al., 2020; Chowdhery et al., 2022). Language modeling has also been
+seen as a grand challenge for AI, most notably in the Hutter Prize and the associated enwiki8 benchmark
+on data compression.77 However, in contrast to these prior framings, where language models were viewed as
+standalone generative models, the models we study in this work instead are better understood by situating
+language models in two broader contexts. First, given the models function as adaptable foundations for the
+myriad scenarios they are tested on, we view language models as foundation models in service of building</Content></Document>
+<Document index=11 title=Gemini: A Family of Highly Capable Multimodal Models><Sumary>This report introduces a new family of multimodal models, Gemini, that
+exhibit remarkable capabilities across image, audio, video, and text
+understanding. The Gemini family consists of Ultra, Pro, and Nano sizes,
+suitable for applications ranging from complex reasoning tasks to on-device
+memory-constrained use-cases. Evaluation on a broad range of benchmarks shows
+that our most-capable Gemini Ultra model advances the state of the art in 30 of
+32 of these benchmarks - notably being the first model to achieve human-expert
+performance on the well-studied exam benchmark MMLU, and improving the state of
+the art in every one of the 20 multimodal benchmarks we examined. We believe
+that the new capabilities of Gemini models in cross-modal reasoning and
+language understanding will enable a wide variety of use cases and we discuss
+our approach toward deploying them responsibly to users.</Sumary><Content>Philippe Tillet, Felipe Petroski Such, Dave Cummings, Matthias Plappert, Fotios Chantzis, Elizabeth
+Barnes, Ariel Herbert-Voss, William Hebgen Guss, Alex Nichol, Alex Paino, Nikolas Tezak, Jie Tang,
+Igor Babuschkin, Suchir Balaji, Shantanu Jain, William Saunders, Christopher Hesse, Andrew N.
+Carr, Jan Leike, Josh Achiam, Vedant Misra, Evan Morikawa, Alec Radford, Matthew Knight, Miles
+Brundage, Mira Murati, Katie Mayer, Peter Welinder, Bob McGrew, Dario Amodei, Sam McCandlish,
+Ilya Sutskever, and Wojciech Zaremba. Evaluating large language models trained on code. arXiv
+preprint arXiv:2107.03374, 2021. URL https://arxiv.org/abs/2107.03374.
+Xi Chen, Xiao Wang, Soravit Changpinyo, A J Piergiovanni, Piotr Padlewski, Daniel Salz, Sebastian
+Goodman, Adam Grycner, Basil Mustafa, Lucas Beyer, Alexander Kolesnikov, Joan Puigcerver,
+Nan Ding, Keran Rong, Hassan Akbari, Gaurav Mishra, Linting Xue, Ashish Thapliyal, James
+Bradbury, Weicheng Kuo, Mojtaba Seyedhosseini, Chao Jia, Burcu Karagol Ayan, Carlos Riquelme,</Content></Document>
+<Document index=12 title=API-Bank: A Comprehensive Benchmark for Tool-Augmented LLMs><Sumary>Recent research has demonstrated that Large Language Models (LLMs) can
+enhance their capabilities by utilizing external tools. However, three pivotal
+questions remain unanswered: (1) How effective are current LLMs in utilizing
+tools? (2) How can we enhance LLMs' ability to utilize tools? (3) What
+obstacles need to be overcome to leverage tools? To address these questions, we
+introduce API-Bank, a groundbreaking benchmark, specifically designed for
+tool-augmented LLMs. For the first question, we develop a runnable evaluation
+system consisting of 73 API tools. We annotate 314 tool-use dialogues with 753
+API calls to assess the existing LLMs' capabilities in planning, retrieving,
+and calling APIs. For the second question, we construct a comprehensive
+training set containing 1,888 tool-use dialogues from 2,138 APIs spanning 1,000
+distinct domains. Using this dataset, we train Lynx, a tool-augmented LLM
+initialized from Alpaca. Experimental results demonstrate that GPT-3.5 exhibits
+improved tool utilization compared to GPT-3, while GPT-4 excels in planning.
+However, there is still significant potential for further improvement.
+Moreover, Lynx surpasses Alpaca's tool utilization performance by more than 26
+pts and approaches the effectiveness of GPT-3.5. Through error analysis, we
+highlight the key challenges for future research in this field to answer the
+third question.</Sumary><Content>plan, Harri Edwards, Yuri Burda, Nicholas Joseph,
+Greg Brockman, et al. 2021.
+Evaluating large
+language models trained on code. arXiv preprint
+arXiv:2107.03374.
+Zhengxiao Du, Yujie Qian, Xiao Liu, Ming Ding,
+Jiezhong Qiu, Zhilin Yang, and Jie Tang. 2022. Glm:
+General language model pretraining with autoregres-
+sive blank infilling. In Proceedings of the 60th An-
+nual Meeting of the Association for Computational
+Linguistics (Volume 1: Long Papers), pages 320–335.
+Shibo Hao, Tianyang Liu, Zhen Wang, and Zhiting
+Hu. 2023.
+Toolkengpt: Augmenting frozen lan-
+guage models with massive tools via tool embeddings.
+arXiv preprint arXiv:2305.11554.
+Gautier Izacard, Patrick Lewis, Maria Lomeli, Lu-
+cas Hosseini, Fabio Petroni, Timo Schick, Jane
+Dwivedi-Yu, Armand Joulin, Sebastian Riedel, and
+Edouard Grave. 2022. Few-shot learning with re-
+trieval augmented language models. arXiv preprint
+arXiv:2208.03299.
+Yaobo Liang, Chenfei Wu, Ting Song, Wenshan Wu,
+Yan Xia, Yu Liu, Yang Ou, Shuai Lu, Lei Ji,</Content></Document>
+<Document index=13 title=Program of Thoughts Prompting: Disentangling Computation from Reasoning for Numerical Reasoning Tasks><Sumary>Recently, there has been significant progress in teaching language models to
+perform step-by-step reasoning to solve complex numerical reasoning tasks.
+Chain-of-thoughts prompting (CoT) is by far the state-of-art method for these
+tasks. CoT uses language models to perform both reasoning and computation in
+the multi-step `thought' process. To disentangle computation from reasoning, we
+propose `Program of Thoughts' (PoT), which uses language models (mainly Codex)
+to express the reasoning process as a program. The computation is relegated to
+an external computer, which executes the generated programs to derive the
+answer. We evaluate PoT on five math word problem datasets (GSM, AQuA, SVAMP,
+TabMWP, MultiArith) and three financial-QA datasets (FinQA, ConvFinQA, TATQA)
+for both few-shot and zero-shot setups. Under both few-shot and zero-shot
+settings, PoT can show an average performance gain over CoT by around 12\%
+across all the evaluated datasets. By combining PoT with self-consistency
+decoding, we can achieve SoTA performance on all math problem datasets and
+near-SoTA performance on financial datasets. All of our data and code are
+released in Github https://github.com/wenhuchen/Program-of-Thoughts</Sumary><Content>Linguistics: Human Language Technologies, Volume 1 (Long and Short Papers), pp. 2357–2367, 2019.
+Jacob Austin, Augustus Odena, Maxwell Nye, Maarten Bosma, Henryk Michalewski, David Dohan, Ellen
+Jiang, Carrie Cai, Michael Terry, Quoc Le, et al. Program synthesis with large language models. arXiv
+preprint arXiv:2108.07732, 2021.
+Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind
+Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, et al. Language models are few-shot learners.
+Advances in neural information processing systems, 33:1877–1901, 2020.
+Mark Chen, Jerry Tworek, Heewoo Jun, Qiming Yuan, Henrique Ponde de Oliveira Pinto, Jared Kaplan,
+Harri Edwards, Yuri Burda, Nicholas Joseph, Greg Brockman, et al. Evaluating large language models
+trained on code. arXiv preprint arXiv:2107.03374, 2021a.
+Wenhu Chen. Large language models are few (1)-shot table reasoners. arXiv preprint arXiv:2210.06710,
+2022.</Content></Document>
+<Document index=14 title=Scaling Relationship on Learning Mathematical Reasoning with Large Language Models><Sumary>Mathematical reasoning is a challenging task for large language models
+(LLMs), while the scaling relationship of it with respect to LLM capacity is
+under-explored. In this paper, we investigate how the pre-training loss,
+supervised data amount, and augmented data amount influence the reasoning
+performances of a supervised LLM. We find that pre-training loss is a better
+indicator of the model's performance than the model's parameter count. We apply
+supervised fine-tuning (SFT) with different amounts of supervised data and
+empirically find a log-linear relation between data amount and model
+performance, and we find better models improve less with enlarged supervised
+datasets. To augment more data samples for improving model performances without
+any human effort, we propose to apply Rejection sampling Fine-Tuning (RFT). RFT
+uses supervised models to generate and collect correct reasoning paths as
+augmented fine-tuning datasets. We find with augmented samples containing more
+distinct reasoning paths, RFT improves mathematical reasoning performance more
+for LLMs. We also find RFT brings more improvement for less performant LLMs.
+Furthermore, we combine rejection samples from multiple models which push
+LLaMA-7B to an accuracy of 49.3\% on GSM8K which outperforms the supervised
+fine-tuning (SFT) accuracy of 35.9\% significantly.</Sumary><Content>smaller language models. In Findings of the Association for Computational Linguistics: ACL
+2023, pp. 7059–7073, Toronto, Canada, July 2023. Association for Computational Linguistics.
+URL https://aclanthology.org/2023.findings-acl.441.
+Feifan Song, Bowen Yu, Minghao Li, Haiyang Yu, Fei Huang, Yongbin Li, and Houfeng Wang.
+Preference ranking optimization for human alignment. arXiv preprint arXiv:2306.17492, 2023.
+InternLM Team. Internlm: A multilingual language model with progressively enhanced capabilities.
+https://github.com/InternLM/InternLM, 2023.
+Hugo Touvron, Thibaut Lavril, Gautier Izacard, Xavier Martinet, Marie-Anne Lachaux, Timoth´
+ee
+Lacroix, Baptiste Rozi`
+ere, Naman Goyal, Eric Hambro, Faisal Azhar, Aurelien Rodriguez, Ar-
+mand Joulin, Edouard Grave, and Guillaume Lample. Llama: Open and efficient foundation
+language models, 2023a.
+Hugo Touvron, Louis Martin, Kevin Stone, Peter Albert, Amjad Almahairi, Yasmine Babaei, Niko-</Content></Document>
+<Document index=15 title=BLOOM: A 176B-Parameter Open-Access Multilingual Language Model><Sumary>Large language models (LLMs) have been shown to be able to perform new tasks
+based on a few demonstrations or natural language instructions. While these
+capabilities have led to widespread adoption, most LLMs are developed by
+resource-rich organizations and are frequently kept from the public. As a step
+towards democratizing this powerful technology, we present BLOOM, a
+176B-parameter open-access language model designed and built thanks to a
+collaboration of hundreds of researchers. BLOOM is a decoder-only Transformer
+language model that was trained on the ROOTS corpus, a dataset comprising
+hundreds of sources in 46 natural and 13 programming languages (59 in total).
+We find that BLOOM achieves competitive performance on a wide variety of
+benchmarks, with stronger results after undergoing multitask prompted
+finetuning. To facilitate future research and applications using LLMs, we
+publicly release our models and code under the Responsible AI License.</Sumary><Content>3.2 Model Architecture
+This section discusses our design methodology and the architecture of the BLOOM model.
+In-depth studies and experiments can be found in Le Scao et al. (2022) and Wang et al.
+(2022a). We first review our design methodology, then motivate our choice of training a
+causal decoder-only model. Finally, we justify the ways that our model architecture deviates
+from standard practice.
+3.2.1 Design Methodology
+The design space of possible architectures is immense, making exhaustive exploration impos-
+sible. One option would be to exactly replicate the architecture of an existing large language
+model. On the other hand, a great deal of work on improving existing architectures has
+seen relatively little adoption (Narang et al., 2021); adopting some of these recommended
+practices could yield a significantly better model. We take a middle ground and focus on
+model families that have been shown to scale well, and that have reasonable support in</Content></Document>
+    </context>
+
+Lembre-se de que o objetivo de cada resumo é servir como um guia de estudo para um Cientista de Dados especialista em AI, Estatística e Deep Learning, com conhecimentos avançados em tecnologia e programação.
+
+!!! Expressões matemáticas usando $ ao invés de \( e \), e $$ ao invés de \[ e \] !!!
+!!! E quando citar variáveis, funções ou trechos de expressões matemáticas use $f(x)$ ao invés de **f(x)** ou \[ e \( !!!
+
+!!! CÓDIGO SOMENTE QUANDO ESTIVER PRESENTE EM ALGUM DOCUMENTO, NÃO CRIE TRECHOS DE CÓDIGO !!!
+
+<template>
+
+Crie um resumo avançado, aprofundado e elaborado sobre X (mínimo de 8 páginas, extenso, não poupe detalhes, aprofunde-se em conceitos técnicos e matemáticos)
+
+**X =** 
+
+Utilize a formatação abaixo como inspiração para o resumo, mas faça as adaptações necessárias com o objetivo de criar o melhor resumo possível. Lembre-se de que o objetivo é servir como um guia de estudo para um Cientista de Dados especialista em AI, Estatística e Deep Learning, com conhecimentos avançados em tecnologia e programação.
+
+Orientações para escrever o resumo:
+
+**Organização e Estrutura**: Garanta que cada seção do resumo esteja bem organizada e siga uma lógica clara. Utilize títulos e subtítulos para facilitar a navegação. Crie uma estrutura hierárquica coerente, com uma introdução, desenvolvimento e conclusão bem definidos.
+
+**Detalhamento**: Aprofunde-se nos conceitos técnicos e matemáticos, fornecendo explicações detalhadas, exemplos práticos e demonstrações passo a passo quando necessário.
+
+**Destaques**: Sempre que mencionar os conceitos principais no texto, utilize **negrito** para destacá-los. Quando quiser inserir uma citação importante ou parafrasear alguém, utilize *itálico*. Utilize caixas de destaque, como notas, avisos e dicas, para enfatizar informações cruciais.
+
+**Estilo e tom:** Escreva de forma acadêmica e formal, mas use emojis quando necessário para dar destaque a alguma informação, por exemplo, ao destacar um tópico usando blockquotes. Utilize emojis como ⚠️❗✔️💡 e outros que façam sentido dado o conteúdo. Mantenha um tom instrutivo e explicativo ao longo do texto.
+
+Template para o resumo:
+
+## Título do Resumo (seja breve)
+
+Inicie com uma introdução concisa, porém abrangente, que contextualize a importância do tema.
+
+### Principais Conceitos
+
+| Conceito       | Explicação                                                   |
+| -------------- | ------------------------------------------------------------ |
+| **Conceito 1** | Forneça uma explicação concisa do conceito, explorando as bases teóricas e suas aplicações práticas. |
+| **Conceito 2** | Forneça uma explicação concisa do conceito, explorando as bases teóricas e suas aplicações práticas. |
+
+Utilize as formatações abaixo como exemplo para destacar informações importantes e críticas:
+
+> ⚠️ **Nota Importante**: Use esta formatação para destacar informações críticas ou observações que não podem ser ignoradas, assegurando que se destaquem no contexto do resumo.
+
+> ❗ **Ponto de Atenção**: Use esta formatação para destacar informações críticas ou observações que requerem maior atenção ao implementar, pois colocam em risco o uso correto do conceito e devem ser levadas em conta pelo usuário.
+
+> ✔️ **Ponto de Destaque** (técnicos e teóricos): Use esta formatação para destacar informações críticas ou observações teóricas ou técnicas que impactam de forma positiva na compreensão do fenômeno, como resultados importantes que não podem ser ignorados.
+
+### Abstract
+
+Copie o abstract ou sumario consolidado dos documentos usados no resumo nessa de forma que o leitor tenha essa referência em mãos quando for estudar o artigo.
+
+### [Explicação de algum tópico ou conceito]
+
+Elabore de forma aprofundada sobre os tópicos e conceitos do tema X, de modo que o resumo seja avançado, detalhado, bem escrito e cumpra os objetivos do texto. Não poupe detalhes!
+
+Quando for contrastar, comparar, etc., informações, use a formatação de lista de tópicos como no exemplo:
+
+#### 👍Vantagens
+
+* Vantagem 1: explicação detalhada e concisa do ponto de vantagem (exemplo)
+* Vantagem 2: explicação detalhada e concisa do ponto de vantagem (exemplo)
+
+#### 👎Desvantagens
+
+* Desvantagem 1: explicação detalhada e concisa do ponto de desvantagem (exemplo)
+* Desvantagem 2: explicação detalhada e concisa do ponto de desvantagem (exemplo)
+
+Ou de tabela, dependendo de qual melhor se ajustar ao conteúdo:
+
+| 👍 Vantagens                                                  | 👎 Desvantagens                                               |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| Explicação detalhada e concisa do ponto de vantagem (exemplo) | Explicação detalhada e concisa do ponto de desvantagem (exemplo) |
+| Explicação detalhada e concisa do ponto de vantagem (exemplo) | Explicação detalhada e concisa do ponto de desvantagem (exemplo) |
+
+Use esse exemplo apenas como inspiração e utilize esses tipos de formatação de acordo com a necessidade de elaborar sobre algum ponto tópico do tema.
+
+### [Explicação de algum tópico ou conceito teórico]
+
+Apresente definições matemáticas e teóricas detalhadas, sem economizar em complexidade. Use a seguinte formatação para equações importantes, garantindo que sejam facilmente legíveis e centralizadas. Por exemplo:
+
+O Teorema de Bayes é um resultado fundamental na teoria da probabilidade que descreve como atualizar as probabilidades de uma hipótese com base em novas evidências. Ele estabelece uma relação entre as probabilidades condicionais de dois eventos.
+
+Seja $A$ e $B$ dois eventos, o Teorema de Bayes afirma que:
+
+$$
+P(A|B) = \frac{P(B|A)P(A)}{P(B)}
+$$
+
+onde:
+
+- $P(A|B)$ é a probabilidade condicional de $A$ dado $B$, também conhecida como probabilidade a posteriori.
+- $P(B|A)$ é a probabilidade condicional de $B$ dado $A$, também conhecida como verossimilhança.
+- $P(A)$ é a probabilidade a priori de $A$.
+- $P(B)$ é a probabilidade marginal de $B$, que atua como uma constante normalizadora.
+
+A probabilidade marginal $P(B)$ pode ser calculada usando a lei da probabilidade total:
+
+$$
+P(B) = P(B|A)P(A) + P(B|\neg A)P(\neg A)
+$$
+
+onde $\neg A$ denota o evento complementar de $A$.
+
+Prossiga com uma discussão detalhada para explicar o funcionamento da equação e suas implicações do conceito. Faça uma análise de seu comportamento matemático, se possível. Por exemplo:
+
+O Teorema de Bayes permite atualizar nossas crenças (probabilidades) sobre uma hipótese $A$ após observar novas evidências $B$. Ele combina nossa crença prévia em $A$ (probabilidade a priori) com a probabilidade de observar $B$ dado que $A$ é verdadeiro (verossimilhança) para obter nossa crença atualizada em $A$ dado $B$ (probabilidade a posteriori).
+
+> ✔️ **Ponto de Destaque**: O Teorema de Bayes fornece uma estrutura matemática para o raciocínio probabilístico e a atualização de crenças com base em novas informações. Ele é amplamente aplicado em áreas como aprendizado de máquina, estatística, ciência da computação e tomada de decisão.
+
+!!! Expressões matemáticas usando $ ao invés de \( e \), e $$ ao invés de \[ e \] !!!
+!!! E quando citar variáveis, funções ou trechos de expressões matemáticas use $f(x)$ ao invés de **f(x)** ou \[ e \( !!!
+
+### [Explicação de algum tópico ou conceito técnico]
+
+Coloque aqui informações relevantes e concisas para explicar a aplicação do tópico e como implementá-lo. Quando houver necessidade de mostrar um código na linguagem apropriada, use a formatação:
+
+```python
+import lib # assuma que as dependências já estão instaladas
+
+# Comentário para elucidar apenas aspectos importantes
+def minha_funcao(param):
+	return lib.outra_funcao(param)
+```
+
+Mantenha os snippets claros, concisos e o menor possível, com foco na funcionalidade principal. Não adicione códigos de setup como pip install, downloads, etc.
+
+!!! CÓDIGO SOMENTE QUANDO ESTIVER PRESENTE EM ALGUM DOCUMENTO, NÃO CRIE TRECHOS DE CÓDIGO !!!
+
+### [Aplicações|Trabalhos futuros|Extensões|etc]
+
+Se houver necessidade de falar sobre aplicações do conceito, trabalhos e pesquisas futuras, áreas de interesse e extensões do conceito, use o seguinte formato:
+
+| Conceito       | Explicação                                                   |
+| -------------- | ------------------------------------------------------------ |
+| **Conceito 1** | Explicação detalhada do conceito, incluindo exemplos práticos e aplicações. |
+| **Conceito 2** | Explicação detalhada do conceito, incluindo exemplos práticos e aplicações. |
+
+### [Tópicos Relacionados]
+
+Para orientar o usuário desse guia, crie uma lista de próximos tópicos avançados relacionados, quando houver necessidade:
+
+- [ ] Tópico relacionado 1
+- [ ] Tópico relacionado 2
+- [ ] etc.
+
+### Conclusão
+
+Resuma todos os tópicos apresentados em uma conclusão sucinta e objetiva.
+
+### Referências
+
+Adicione aqui as referências da seguinte forma:
+
+[1] Attention is All You Need
+[2] Other paper name
+[3] Etc
+
+!!! Lembre-se de que esse template é apenas um guia e você deve apenas se inspirar nele, sem a necessidade de replicar a mesma estrutura ao pé da letra. Foque no objetivo !!!
+
+!!! NÃO POUPE DETALHES, SEJA O MAIS APROFUNDADO POSSÍVEL !!!
+
+!!! CÓDIGO SOMENTE QUANDO ESTIVER PRESENTE EM ALGUM DOCUMENTO, NÃO CRIE TRECHOS DE CÓDIGO !!!
+
+!!! Expressões matemáticas usando $ ao invés de \( e \), e $$ ao invés de \[ e \] !!!
+!!! E quando citar variáveis, funções ou trechos de expressões matemáticas use $f(x)$ ao invés de **f(x)** ou \[ e \( !!!
+
+</template>
+
+Diretrizes para o resumo:
+Os resumos devem ser avançados;
+Os resumos devem ser baseados nos principais aspectos do conceito abordado no texto, como técnicas ou funcionalidades específicas demonstradas em cada subcapítulo;
+O resumo deve conter todas principais informações presentes no texto sem omitir nenhum dado importante, com foco especial em não pular nenhum conceitos, resultados importante, argumentos, etc;
+O resumo deve conter as equações apresentadas, tabelas e outras informações críticas para um entendimento aprofundando e avançado do conteúdo;
+O resumo deve ser escrito de uma maneira acadêmica, do not repeat text.
+Você deve usar o <context> da melhor maneira possível para responder a query do usuário e escrever o resumo segundo as diretrizes;
+You must not tell the user to open any link or visit any website to get the answer. You must provide the answer in the response itself;
+Você não deve pedir para o usuário abrir um link ou visitar um site para ver a resposta. Você deve responder você mesmo;
+You have to cite the answer using [number] notation. The number is the idx on the documents. You must cite the sentences with their relevent context number. You must cite each and every part of the answer so the user can know where the information is coming from.
+Place these citations at the end of that particular sentence. You can cite the same sentence multiple times if it is relevant to the user's query like [number1][number2].
+However you do not need to cite it using the same number. You can use different numbers to cite the same sentence multiple times. The number refers to the number of the search result (passed in the context) used to generate that part of the answer.
+Coloque os resultados um texto coerente ao invés de apenas listar em tópicos, também foque em usar as formatações mostradas no template.
+
+!!! CÓDIGO SOMENTE QUANDO ESTIVER PRESENTE EM ALGUM DOCUMENTO, NÃO CRIE TRECHOS DE CÓDIGO !!!
+
+
+X = Large Language Models as World Models",,,2024-07-04 19:47:52.940228

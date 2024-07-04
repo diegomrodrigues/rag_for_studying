@@ -55,8 +55,18 @@ def create_prompt_for_summary(query):
 
     return template
 
-query = "Instruct GPT"
+import gradio as gr
 
-prompt = create_prompt_for_summary(query)
+def chat_interface(query):
+    return create_prompt_for_summary(query)
 
-print(prompt)
+demo = gr.Interface(
+    fn=chat_interface,
+    inputs=gr.Textbox(lines=2, placeholder="Enter your question here..."),
+    outputs=gr.Textbox(lines=10, show_copy_button=True),
+    title="Simple RAG Template for Generation",
+    description="Generates a prompt for late being used in Gemini with long context window",
+    theme="default"
+)
+
+demo.launch(share=True)
