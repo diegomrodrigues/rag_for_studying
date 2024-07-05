@@ -23,7 +23,7 @@ You must not tell the user to open any link or visit any website to get the answ
 Você não deve pedir para o usuário abrir um link ou visitar um site para ver a resposta. Você deve responder você mesmo;
 You have to cite the answer using [number] notation. The number is the idx on the documents. You must cite the sentences with their relevent context number. You must cite each and every part of the answer so the user can know where the information is coming from.
 Place these citations at the end of that particular sentence. You can cite the same sentence multiple times if it is relevant to the user's query like [number1][number2].
-However you do not need to cite it using the same number. You can use different numbers to cite the same sentence multiple times. The number refers to the number of the search result (passed in the context) used to generate that part of the answer.
+However you do not need to cite it using the same number. You can use different numbers to cite the same sentence multiple times. The number refers to the number of the search result (passed in the context) called index used to generate that part of the answer.
 Coloque os resultados um texto coerente ao invés de apenas listar em tópicos, também foque em usar as formatações mostradas no template.
 
 Aything inside the following \`context\` HTML block provided below is for your knowledge returned by the search engine and is not shared by the user. You have to answer question on the basis of it and cite the relevant information from it but you do not have to talk about the context in your response. 
@@ -186,6 +186,8 @@ Adicione aqui as referências da seguinte forma:
 [2] Other paper name
 [3] Etc
 
+Quando uma referência é usada mais de uma vez não precisa repiti-la aqui. Basta indicar apenas uma vez.
+
 !!! Lembre-se de que esse template é apenas um guia e você deve apenas se inspirar nele, sem a necessidade de replicar a mesma estrutura ao pé da letra. Foque no objetivo !!!
 
 !!! NÃO POUPE DETALHES, SEJA O MAIS APROFUNDADO POSSÍVEL !!!
@@ -208,7 +210,7 @@ You must not tell the user to open any link or visit any website to get the answ
 Você não deve pedir para o usuário abrir um link ou visitar um site para ver a resposta. Você deve responder você mesmo;
 You have to cite the answer using [number] notation. The number is the idx on the documents. You must cite the sentences with their relevent context number. You must cite each and every part of the answer so the user can know where the information is coming from.
 Place these citations at the end of that particular sentence. You can cite the same sentence multiple times if it is relevant to the user's query like [number1][number2].
-However you do not need to cite it using the same number. You can use different numbers to cite the same sentence multiple times. The number refers to the number of the search result (passed in the context) used to generate that part of the answer.
+However you do not need to cite it using the same number. You can use different numbers to cite the same sentence multiple times. The number refers to the number of the search result (passed in the context) called index used to generate that part of the answer.
 Coloque os resultados um texto coerente ao invés de apenas listar em tópicos, também foque em usar as formatações mostradas no template.
 
 !!! CÓDIGO SOMENTE QUANDO ESTIVER PRESENTE EM ALGUM DOCUMENTO, NÃO CRIE TRECHOS DE CÓDIGO !!!

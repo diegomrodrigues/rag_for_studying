@@ -1,5 +1,7 @@
+import os
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+import gradio as gr
 
 embeddings = HuggingFaceEmbeddings(
     model_name="all-MiniLM-L6-v2",
@@ -7,11 +9,12 @@ embeddings = HuggingFaceEmbeddings(
     model_kwargs={'device': 'cpu'}
 )
 
-vectorstore = FAISS.load_local(
-    './assets/retrievers/large_language_models', 
-    embeddings, 
-    allow_dangerous_deserialization=True
-)
+def load_vectorstore(name):
+    return FAISS.load_local(
+        f"./assets/retrievers/{name}", 
+        embeddings, 
+        allow_dangerous_deserialization=True
+    )
 
 def retrieve(query, retriever):
     results = retriever.invoke(query)
@@ -21,9 +24,9 @@ def retrieve(query, retriever):
     for idx, doc in enumerate(results):
         document = (
             f"<Document index={idx+1} title={doc.metadata['Title']}>" +
-                "<Sumary>" +
+                "<Summary>" +
                     doc.metadata['Summary'] +
-                "</Sumary>" +
+                "</Summary>" +
                 "<Content>" +
                     doc.page_content +
                 "</Content>" +
@@ -34,10 +37,11 @@ def retrieve(query, retriever):
 
     return documents
 
-def create_prompt_for_summary(query):
+def create_prompt_for_summary(query, retriever_name):
     with open("./assets/templates/Template para RAG Artigos.md", "r") as f:
         template = f.read()
 
+    vectorstore = load_vectorstore(retriever_name)
     retriever = vectorstore.as_retriever(search_kwargs={"k": 15})
 
     documents = retrieve(query, retriever)
@@ -55,18 +59,22 @@ def create_prompt_for_summary(query):
 
     return template
 
-import gradio as gr
+def chat_interface(query, retriever_path):
+    return create_prompt_for_summary(query, retriever_path)
 
-def chat_interface(query):
-    return create_prompt_for_summary(query)
+# Get list of retriever paths
+retriever_names = [f for f in os.listdir('./assets/retrievers') if os.path.isdir(os.path.join('./assets/retrievers', f))]
 
 demo = gr.Interface(
     fn=chat_interface,
-    inputs=gr.Textbox(lines=2, placeholder="Enter your question here..."),
+    inputs=[
+        gr.Textbox(lines=2, label="Question", placeholder="Enter your question here..."),
+        gr.Dropdown(choices=retriever_names, label="Select Retriever")
+    ],
     outputs=gr.Textbox(lines=10, show_copy_button=True),
     title="Simple RAG Template for Generation",
-    description="Generates a prompt for late being used in Gemini with long context window",
+    description="Generates a prompt for later use in Gemini with long context window",
     theme="default"
 )
 
-demo.launch(share=True)
+demo.launch(share=False)
