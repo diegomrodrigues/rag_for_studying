@@ -53,6 +53,10 @@ class AsyncCrawler:
         return True
 
     def should_collect(self, url):
+        # TODO: fix this
+        if not "pdf" in url:
+            return False
+
         parsed_url = urlparse(url)
         return any(domain in parsed_url.netloc for domain in self.collect_domains)
 
@@ -158,7 +162,10 @@ class AsyncCrawler:
 
 if __name__ == "__main__":
     urls = [
-        "https://raw.githubusercontent.com/Hannibal046/Awesome-LLM/main/README.md"
+        "https://raw.githubusercontent.com/cmhungsteve/Awesome-Transformer-Attention/main/README.md",
+        "https://raw.githubusercontent.com/cmhungsteve/Awesome-Transformer-Attention/main/README_2.md",
+        "https://raw.githubusercontent.com/cmhungsteve/Awesome-Transformer-Attention/main/README_multimodal.md",
+        
     ]
     ignore_domains = [
         "twitter.com",
@@ -182,13 +189,14 @@ if __name__ == "__main__":
             return f"https://arxiv.org/pdf/{match.group(1)}.pdf"
         return url
 
+    # URL pattern for arXiv links in the format 'https://arxiv.org/abs/1234.5678'
     url_patterns = {
         r'https?://arxiv.org/abs/\d+\.\d+': arxiv_to_pdf,
         # Add more patterns and transformations as needed
     }
 
     crawler = AsyncCrawler(
-        name="large-language-models",
+        name="attention-mechanisms",
         urls=urls, 
         max_depth=1, 
         ignore_domains=ignore_domains, 
