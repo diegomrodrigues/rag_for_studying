@@ -66,20 +66,39 @@ def create_prompt_for_summary(query, retriever_name, num_results):
 def chat_interface(query, retriever_path, num_results):
     return create_prompt_for_summary(query, retriever_path, num_results)
 
+def call_gemini_model(prompt):
+    return prompt
+
 # Get list of retriever paths
 retriever_names = [f for f in os.listdir('./assets/retrievers') if os.path.isdir(os.path.join('./assets/retrievers', f))]
 
-demo = gr.Interface(
-    fn=chat_interface,
-    inputs=[
-        gr.Textbox(lines=2, label="Question", placeholder="Enter your question here..."),
-        gr.Dropdown(choices=retriever_names, label="Select Retriever"),
-        gr.Number(label="Num. Results")
-    ],
-    outputs=gr.Textbox(lines=10, show_copy_button=True),
-    title="Simple RAG Template for Generation",
-    description="Generates a prompt for later use in Gemini with long context window",
-    theme="default"
-)
+
+with gr.Blocks(theme="default") as demo:
+    gr.Markdown("# Simple RAG Template for Generation")
+    gr.Markdown("Generates a prompt for later use in Gemini with long context window")
+    
+    with gr.Row():
+        with gr.Column():
+            question = gr.Textbox(lines=2, label="Question", placeholder="Enter your question here...")
+            retriever = gr.Dropdown(choices=retriever_names, label="Select Retriever")
+            num_results = gr.Number(label="Num. Results", value=4)
+        
+        with gr.Column():
+            raw_output = gr.Textbox(lines=10, show_copy_button=True)
+    
+    submit_btn = gr.Button("Generate")
+
+    with gr.Row():
+        model_output = gr.Markdown("Gemini output...")
+
+    submit_btn.click(
+        fn=chat_interface,
+        inputs=[question, retriever, num_results],
+        outputs=raw_output
+    ).then(
+        fn=call_gemini_model,
+        inputs=raw_output,
+        outputs=model_output
+    )
 
 demo.launch(share=False)

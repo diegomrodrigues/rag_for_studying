@@ -4715,7 +4715,6 @@
       "https://arxiv.org/pdf/2203.12612.pdf",
       "https://arxiv.org/pdf/2307.09356.pdf",
       "https://arxiv.org/pdf/2104.01318.pdf",
-      "https://arxiv.org/pdf/<ARXIV PAPER ID>.pdf",
       "https://arxiv.org/pdf/2303.15937.pdf",
       "https://arxiv.org/pdf/2211.10567.pdf",
       "https://arxiv.org/pdf/2210.01723.pdf",
@@ -5559,7 +5558,6 @@
       "https://arxiv.org/pdf/2203.10202.pdf",
       "https://arxiv.org/pdf/2204.14195.pdf",
       "https://arxiv.org/pdf/2309.16650.pdf",
-      "https://arxiv.org/ftp/arxiv/papers/2105/2105.13993.pdf",
       "https://arxiv.org/pdf/2103.16553.pdf",
       "https://arxiv.org/pdf/2204.11385.pdf",
       "https://arxiv.org/pdf/2212.03220.pdf",
@@ -5890,12 +5888,6 @@
       "https://arxiv.org/pdf/2209.07046.pdf",
       "https://arxiv.org/pdf/2307.08629.pdf",
       "https://arxiv.org/pdf/2405.16009.pdf"
-    ],
-    "www.arxiv.org": [
-      "https://www.arxiv.org/pdf/2405.16009"
-    ],
-    "browse.arxiv.org": [
-      "https://browse.arxiv.org/pdf/2211.09663.pdf"
     ]
   }
 }

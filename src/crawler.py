@@ -162,10 +162,7 @@ class AsyncCrawler:
 
 if __name__ == "__main__":
     urls = [
-        "https://raw.githubusercontent.com/cmhungsteve/Awesome-Transformer-Attention/main/README.md",
-        "https://raw.githubusercontent.com/cmhungsteve/Awesome-Transformer-Attention/main/README_2.md",
-        "https://raw.githubusercontent.com/cmhungsteve/Awesome-Transformer-Attention/main/README_multimodal.md",
-        
+        "https://raw.githubusercontent.com/synbol/Awesome-Parameter-Efficient-Transfer-Learning/main/README.md"        
     ]
     ignore_domains = [
         "twitter.com",
@@ -196,7 +193,7 @@ if __name__ == "__main__":
     }
 
     crawler = AsyncCrawler(
-        name="attention-mechanisms",
+        name="parameter-efficient-fine-tunning",
         urls=urls, 
         max_depth=1, 
         ignore_domains=ignore_domains, 

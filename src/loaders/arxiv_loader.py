@@ -28,7 +28,7 @@ class CustomArxivLoader(ArxivLoader):
         return update_metadata(documents)
 
 if __name__ == "__main__":
-    retriever = "large-language-models"
+    retriever = "llm-rl-human-feedback"
 
     with open(f"./assets/results/crawler_{retriever}.json") as file:
         results = json.load(file)
